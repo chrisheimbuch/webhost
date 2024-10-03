@@ -1,0 +1,109 @@
+/* Updated styles.css */
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #d9d5c4;
+    margin: 0;
+    padding: 20px;
+}
+
+h1 {
+    text-align: center;
+    color: #333;
+    font-size: 40px;
+    text-decoration: underline;
+}
+
+h2 {
+    text-align: center;
+    color: #1f1f1f;
+    font-size: 14px;
+}
+
+h4 {
+    text-align: center;
+    color: #1f1f1f;
+    font-size: 14px;
+    margin-top: -20px;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+#upload-form {
+    margin-bottom: 20px;
+}
+
+input[type="file"] {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.button-container {
+    display: flex;
+    justify-content: center; /* Centers the buttons horizontally */
+    align-items: center; /* Aligns items on the same line */
+    gap: 10px; /* Adjusts the space between the file input and button */
+    margin-top: 20px;
+}
+
+button {
+    padding: 10px 15px;
+    border: none;
+    background-color: #5cb85c;
+    color: white;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #4cae4c;
+}
+
+.image-container {
+    text-align: center;
+    margin: 20px 0;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+}
+
+.reupload-container {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.reupload-container button {
+    padding: 10px 15px;
+    border: none;
+    background-color: #5cb85c;
+    color: white;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.reupload-container button:hover {
+    background-color: #4cae4c;
+}
+
+.upload-instruction {
+    font-size: 14px; /* Adjust size as needed */
+}
+
+.accuracy ul {
+    list-style-type: none; 
+    padding: 0; 
+    margin: 0; 
+}

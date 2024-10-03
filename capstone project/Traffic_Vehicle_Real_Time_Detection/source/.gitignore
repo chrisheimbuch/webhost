@@ -1,0 +1,14 @@
+# Ignore requirements.txt
+requirements.txt
+
+# Ignore meta.json
+meta.json
+
+# Ignore all .avi files
+*.avi
+
+# Ignore all __pycache__ folders
+__pycache__/
+
+# Ignore all .cache files
+*.cache

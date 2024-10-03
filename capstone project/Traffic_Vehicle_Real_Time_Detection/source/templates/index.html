@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vehicle Object Detection</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <style>
+        /* Center video display, image display, and download button */
+        .video-container, .image-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            margin-top: 20px;
+        }
+
+        .download-link {
+            margin-top: 10px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .reupload-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+
+        {% if not image_path and not video_path %}
+            <!-- Display this heading and author only on the homepage before image or video upload -->
+            <h1>Vehicle Type Object Detection</h1>
+            <h4 class="author">Built by Chris Heimbuch using Flask, Pytorch, and YOLO v8</h4>
+
+            <!-- Display static image only on the homepage before image or video upload -->
+            <div class="static-image-container">
+                <img src="{{ url_for('static', filename='Koenigsegg-Jesko-Attack-Plus-Green-spec-3.webp') }}" alt="Static Image">
+            </div>
+
+            <!-- Upload form for image detection -->
+            <form id="upload-form" method="POST" enctype="multipart/form-data">
+                <div class="button-container"> 
+                    <input type="file" name="image" accept="image/*" required>
+                    <button type="submit">Upload Image and Detect</button>
+                </div>
+                <h2 class="upload-instruction">Click on "Choose File" and select an image with vehicles you would like to upload!</h2>
+            </form>
+
+            <!-- Upload Video for Detection form -->
+            <form id="video-upload-form" method="POST" enctype="multipart/form-data" action="{{ url_for('video_detection') }}">
+                <div class="button-container"> 
+                    <!-- Allow both .mp4 and .mov files -->
+                    <input type="file" name="video" accept="video/mp4, video/quicktime" required>
+                    <button type="submit">Upload Video and Detect</button>
+                </div>
+                <h2 class="upload-instruction">Click on "Choose File" and select a video with vehicles you would like to upload!</h2>
+            </form>
+
+            <!-- Start Real-Time Detection button -->
+            <div class="button-container">
+                <a href="{{ url_for('webcam_feed') }}">
+                    <button type="button">Start Real-Time Detection (Webcam)</button>
+                </a>    
+            </div>
+
+        {% elif image_path %}
+            <!-- Display only the "Results" heading after an image is uploaded -->
+            <h1>Image Detection Results</h1>
+
+            <!-- Display processed image and results -->
+            <div class="image-container">
+                <img src="{{ image_path }}" alt="Processed Image">
+                <div class="accuracy">
+                    <h3>Classifications and Confidence Scores:</h3>
+                    <ul style="list-style-type:none;">
+                        {% for classification in classifications %}
+                        <li>{{ classification.class }}: {{ classification.confidence }}%</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+
+                <!-- Download the processed image -->
+                <div class="download-link">
+                    <a href="{{ url_for('static', filename='processed_image.jpg') }}" download="processed_image.jpg">
+                        <button>Download Processed Image</button>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Re-upload Button -->
+            <div class="reupload-container">
+                <a href="{{ url_for('reupload') }}">
+                    <button type="button">Click here to re-upload an image or video</button>
+                </a>
+            </div>
+
+        {% elif video_path %}
+            <!-- Display only the "Results" heading after a video is uploaded -->
+            <h1>Video Detection Results</h1>
+        
+            <!-- Display processed video -->
+            <div class="video-container">
+                <video width="640" height="480" controls>
+                    <source src="{{ url_for('static', filename=video_path) }}?t={{ current_timestamp }}" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+
+                <!-- Download the processed video -->
+                <div class="download-link">
+                    <a href="{{ url_for('static', filename=video_path) }}" download="processed_video.mp4">
+                        <button>Download Processed Video</button>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Re-upload Button -->
+            <div class="reupload-container">
+                <a href="{{ url_for('reupload') }}">
+                    <button type="button">Click here to re-upload a video or image</button>
+                </a>
+            </div>
+        {% endif %}
+    </div>
+</body>
+</html>
