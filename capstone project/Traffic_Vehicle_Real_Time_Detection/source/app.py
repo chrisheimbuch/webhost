@@ -10,7 +10,7 @@ import os
 app = Flask(__name__)
 
 #Note: Update this path to where ever the best.pt file is saved on your computer directory.
-model_path = r"capstone project/Traffic_Vehicle_Real_Time_Detection/source/runs/detect/train/weights/best.pt"
+model_path = r"best.pt"
 
 #YOLO model instance
 yolo_model = YOLO(model_path)
