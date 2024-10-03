@@ -29,7 +29,7 @@ def gen_frames():
             break
         
         #Process the frame with YOLO model
-        results = yolo_model.predict(source=frame, save=False)
+        results = yolo_model.predict(source=frame, save=False, device='cpu')
         
         for result in results:
             boxes = result.boxes.xyxy  #This is bounding box coordinates
@@ -90,7 +90,7 @@ def video_detection():
             break
         
         #Process the frame with YOLO model
-        results = yolo_model.predict(source=frame, save=False, device='cuda')
+        results = yolo_model.predict(source=frame, save=False, device='cpu')
         
         for result in results:
             boxes = result.boxes.xyxy  #Bounding box coordinates
